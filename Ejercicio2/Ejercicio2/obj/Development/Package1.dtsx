@@ -1,0 +1,1044 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/8/2020 12:27:44 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-72A6VBS4"
+  DTS:CreatorName="LAPTOP-72A6VBS4\willi"
+  DTS:Description="DTS Wizard-generated package"
+  DTS:DTSID="{2BF4A954-4671-4B49-819D-C5DE6C965C1C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.123"
+  DTS:LocaleID="3082"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="Package1"
+  DTS:VersionGUID="{88F37B65-F107-4030-9974-A79B32EF22A5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{76267E2C-28F2-48A9-A5FA-DE791A31D288}"
+      DTS:ObjectName="DestinationConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LAPTOP-72A6VBS4\SQLEXPRESS;Initial Catalog=Control_Ventas;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionExcel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{EABF4FC7-18AB-4CBB-B68E-20CF08555264}"
+      DTS:ObjectName="SourceConnectionExcel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\willi\Desktop\DMD Guias\Guia 1\Control_Ventas.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tarea de SQL Preparación 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{CFE25622-5C2B-4B1E-8DD7-302B1C4F2FEC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea de SQL Preparación 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{76267E2C-28F2-48A9-A5FA-DE791A31D288}"
+          SQLTask:SqlStatementSource="CREATE TABLE [dbo].[Ventas$] (&#xA;[PedidoID] float,&#xA;[Nombre_Tienda] nvarchar(255),&#xA;[Nombre_Territorio] nvarchar(255),&#xA;[Codigo_Pais] nvarchar(255),&#xA;[Fecha_Pedido] nvarchar(255),&#xA;[Nombre_Producto] nvarchar(255),&#xA;[Precio_Unitario] money,&#xA;[Descuento_PrecioUnitario] float,&#xA;[Cantidad_Pedido] float&#xA;)&#xA;GO&#xA;CREATE TABLE [dbo].[vista_prueba] (&#xA;[PedidoID] nvarchar(255),&#xA;[Nombre_Tienda] nvarchar(255),&#xA;[Nombre_Territorio] nvarchar(255),&#xA;[Codigo_Pais] nvarchar(255),&#xA;[Fecha_Pedido] nvarchar(255),&#xA;[Nombre_Producto] nvarchar(255),&#xA;[Precio_Unitario] nvarchar(255),&#xA;[Descuento_PrecioUnitario] nvarchar(255),&#xA;[Cantidad_Pedido] nvarchar(255)&#xA;)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Flujo de datos 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{6C661395-E834-414B-91B1-6ADBD6C34BF5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Flujo de datos 1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Tarea Flujo de datos 1\Destino - Ventas$"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino - Ventas$"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[Ventas$]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[PedidoID]"
+                      cachedDataType="r8"
+                      cachedName="PedidoID"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[PedidoID]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[PedidoID]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Nombre_Tienda]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre_Tienda"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Nombre_Tienda]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Tienda]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Nombre_Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre_Territorio"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Nombre_Territorio]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Territorio]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Codigo_Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Codigo_Pais"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Codigo_Pais]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Codigo_Pais]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Fecha_Pedido]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Fecha_Pedido"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Fecha_Pedido]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Fecha_Pedido]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Nombre_Producto]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre_Producto"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Nombre_Producto]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Producto]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Precio_Unitario]"
+                      cachedDataType="cy"
+                      cachedName="Precio_Unitario"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Precio_Unitario]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Precio_Unitario]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Descuento_PrecioUnitario]"
+                      cachedDataType="r8"
+                      cachedName="Descuento_PrecioUnitario"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Descuento_PrecioUnitario]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Descuento_PrecioUnitario]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].Columns[Cantidad_Pedido]"
+                      cachedDataType="r8"
+                      cachedName="Cantidad_Pedido"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Cantidad_Pedido]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Cantidad_Pedido]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[PedidoID]"
+                      dataType="r8"
+                      name="PedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Nombre_Tienda]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Tienda" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Nombre_Territorio]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Territorio" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Codigo_Pais]"
+                      dataType="wstr"
+                      length="255"
+                      name="Codigo_Pais" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Fecha_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      name="Fecha_Pedido" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Nombre_Producto]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Precio_Unitario]"
+                      dataType="cy"
+                      name="Precio_Unitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Descuento_PrecioUnitario]"
+                      dataType="r8"
+                      name="Descuento_PrecioUnitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input].ExternalColumns[Cantidad_Pedido]"
+                      dataType="r8"
+                      name="Cantidad_Pedido" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino 1 - vista_prueba"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[vista_prueba]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[PedidoID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PedidoID"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[PedidoID]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[PedidoID]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Nombre_Tienda]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre_Tienda"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Nombre_Tienda]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Tienda]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Nombre_Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre_Territorio"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Nombre_Territorio]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Territorio]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Codigo_Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Codigo_Pais"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Codigo_Pais]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Codigo_Pais]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Fecha_Pedido]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Fecha_Pedido"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Fecha_Pedido]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Fecha_Pedido]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Nombre_Producto]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre_Producto"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Nombre_Producto]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Producto]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Precio_Unitario]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Precio_Unitario"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Precio_Unitario]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Precio_Unitario]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Descuento_PrecioUnitario]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Descuento_PrecioUnitario"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Descuento_PrecioUnitario]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Descuento_PrecioUnitario]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].Columns[Cantidad_Pedido]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cantidad_Pedido"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Cantidad_Pedido]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Cantidad_Pedido]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[PedidoID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Nombre_Tienda]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Tienda" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Nombre_Territorio]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Territorio" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Codigo_Pais]"
+                      dataType="wstr"
+                      length="255"
+                      name="Codigo_Pais" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Fecha_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      name="Fecha_Pedido" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Nombre_Producto]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Precio_Unitario]"
+                      dataType="wstr"
+                      length="255"
+                      name="Precio_Unitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Descuento_PrecioUnitario]"
+                      dataType="wstr"
+                      length="255"
+                      name="Descuento_PrecioUnitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input].ExternalColumns[Cantidad_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cantidad_Pedido" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos 1\Origen - Ventas$"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Origen - Ventas$"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">Ventas$</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceConnectionExcel]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionExcel]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[PedidoID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[PedidoID]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[PedidoID]"
+                      name="PedidoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Tienda]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Tienda]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Tienda]"
+                      name="Nombre_Tienda"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Territorio]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Territorio]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Territorio]"
+                      name="Nombre_Territorio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Codigo_Pais]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Codigo_Pais]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Codigo_Pais]"
+                      name="Codigo_Pais"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Fecha_Pedido]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Fecha_Pedido]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Fecha_Pedido]"
+                      name="Fecha_Pedido"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Producto]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Producto]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Nombre_Producto]"
+                      name="Nombre_Producto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Precio_Unitario]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Precio_Unitario]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Precio_Unitario]"
+                      name="Precio_Unitario"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Descuento_PrecioUnitario]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      name="Descuento_PrecioUnitario"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Cantidad_Pedido]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Cantidad_Pedido]"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].Columns[Cantidad_Pedido]"
+                      name="Cantidad_Pedido"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[PedidoID]"
+                      dataType="r8"
+                      name="PedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Tienda]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Tienda" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Territorio]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Territorio" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Codigo_Pais]"
+                      dataType="wstr"
+                      length="255"
+                      name="Codigo_Pais" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Fecha_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      name="Fecha_Pedido" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Producto]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Precio_Unitario]"
+                      dataType="cy"
+                      name="Precio_Unitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Descuento_PrecioUnitario]"
+                      dataType="r8"
+                      name="Descuento_PrecioUnitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel].ExternalColumns[Cantidad_Pedido]"
+                      dataType="r8"
+                      name="Cantidad_Pedido" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[PedidoID]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[PedidoID]"
+                      name="PedidoID" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Nombre_Tienda]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Nombre_Tienda]"
+                      name="Nombre_Tienda" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Nombre_Territorio]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Nombre_Territorio]"
+                      name="Nombre_Territorio" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Codigo_Pais]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Codigo_Pais]"
+                      name="Codigo_Pais" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Fecha_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Fecha_Pedido]"
+                      name="Fecha_Pedido" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Nombre_Producto]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Nombre_Producto]"
+                      name="Nombre_Producto" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Precio_Unitario]"
+                      dataType="cy"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Precio_Unitario]"
+                      name="Precio_Unitario" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      name="Descuento_PrecioUnitario" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Cantidad_Pedido]"
+                      dataType="r8"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[Cantidad_Pedido]"
+                      name="Cantidad_Pedido" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Origen 1 - vista_prueba"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">vista_prueba</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceConnectionExcel]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionExcel]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[PedidoID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[PedidoID]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[PedidoID]"
+                      name="PedidoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Tienda]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Tienda]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Tienda]"
+                      name="Nombre_Tienda"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Territorio]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Territorio]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Territorio]"
+                      name="Nombre_Territorio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Codigo_Pais]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Codigo_Pais]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Codigo_Pais]"
+                      name="Codigo_Pais"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Fecha_Pedido]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Fecha_Pedido]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Fecha_Pedido]"
+                      name="Fecha_Pedido"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Producto]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Producto]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Nombre_Producto]"
+                      name="Nombre_Producto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Precio_Unitario]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Precio_Unitario]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Precio_Unitario]"
+                      name="Precio_Unitario"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Descuento_PrecioUnitario]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      name="Descuento_PrecioUnitario"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Cantidad_Pedido]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Cantidad_Pedido]"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].Columns[Cantidad_Pedido]"
+                      name="Cantidad_Pedido"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[PedidoID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Tienda]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Tienda" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Territorio]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Territorio" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Codigo_Pais]"
+                      dataType="wstr"
+                      length="255"
+                      name="Codigo_Pais" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Fecha_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      name="Fecha_Pedido" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Nombre_Producto]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Precio_Unitario]"
+                      dataType="wstr"
+                      length="255"
+                      name="Precio_Unitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Descuento_PrecioUnitario]"
+                      dataType="wstr"
+                      length="255"
+                      name="Descuento_PrecioUnitario" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel].ExternalColumns[Cantidad_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cantidad_Pedido" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[PedidoID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[PedidoID]"
+                      name="PedidoID" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Nombre_Tienda]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Nombre_Tienda]"
+                      name="Nombre_Tienda" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Nombre_Territorio]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Nombre_Territorio]"
+                      name="Nombre_Territorio" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Codigo_Pais]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Codigo_Pais]"
+                      name="Codigo_Pais" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Fecha_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Fecha_Pedido]"
+                      name="Fecha_Pedido" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Nombre_Producto]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Nombre_Producto]"
+                      name="Nombre_Producto" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Precio_Unitario]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Precio_Unitario]"
+                      name="Precio_Unitario" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Descuento_PrecioUnitario]"
+                      name="Descuento_PrecioUnitario" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Cantidad_Pedido]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[Cantidad_Pedido]"
+                      name="Cantidad_Pedido" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tarea Flujo de datos 1.Paths[Salida de origen de Excel]"
+              endId="Package\Tarea Flujo de datos 1\Destino - Ventas$.Inputs[Destination Input]"
+              name="Salida de origen de Excel"
+              startId="Package\Tarea Flujo de datos 1\Origen - Ventas$.Outputs[Salida de origen de Excel]" />
+            <path
+              refId="Package\Tarea Flujo de datos 1.Paths[Salida de origen de Excel1]"
+              endId="Package\Tarea Flujo de datos 1\Destino 1 - vista_prueba.Inputs[Destination Input]"
+              name="Salida de origen de Excel"
+              startId="Package\Tarea Flujo de datos 1\Origen 1 - vista_prueba.Outputs[Salida de origen de Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{3E14083E-518C-4018-AF06-64266DF85671\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{3E14083E-518C-4018-AF06-64266DF85671}"
+      DTS:From="Package\Tarea de SQL Preparación 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{3E14083E-518C-4018-AF06-64266DF85671}"
+      DTS:To="Package\Tarea Flujo de datos 1" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>
