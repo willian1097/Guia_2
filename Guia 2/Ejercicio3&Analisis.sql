@@ -1,6 +1,7 @@
 create database db_electrodomesticos;
 go
 use db_electrodomesticos;
+go
 
 create table ventas_electrodomesticos
 (
